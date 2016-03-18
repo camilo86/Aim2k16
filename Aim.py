@@ -1,7 +1,9 @@
 from SimpleCV import Camera, Display
+import time
 
-cam = Camera(0, {"width": 640, "height": 360})
+cam = Camera(0, {"width": 640, "height": 320})
 display = Display()
 
-while True:
-	img = cam.getImage().show()
+while not display.isDone():
+	cam.getImage().toRGB().colorDistance((0, 0, 255)).binarize(50).save(display)
+	time.sleep(0.01)
